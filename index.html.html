@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Joseph Aguilar – IT Support Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:       #080F1E;
+    --surface:  #0E1829;
+    --card:     #131F33;
+    --border:   #1E3050;
+    --accent:   #38BDF8;
+    --accent2:  #818CF8;
+    --green:    #34D399;
+    --amber:    #FBBF24;
+    --text:     #E2EAF4;
+    --muted:    #6B85A8;
+    --mono:     'JetBrains Mono', monospace;
+    --sans:     'Inter', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(8,15,30,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+  .nav-links { display: flex; gap: 1.75rem; }
+  .nav-links a {
+    font-size: 13px; color: var(--muted);
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+  /* ── HERO ── */
+  .hero {
+    max-width: 1100px; margin: 0 auto;
+    padding: 5rem 2rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .dot-live {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 3px rgba(52,211,153,0.2);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 3px rgba(52,211,153,0.2); }
+    50%      { box-shadow: 0 0 0 6px rgba(52,211,153,0.08); }
+  }
+
+  .hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+  .hero h1 span { color: var(--accent); }
+
+  .hero-sub {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 480px;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .hero-tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 2rem;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: var(--card);
+    letter-spacing: 0.04em;
+  }
+
+  .hero-cta {
+    display: flex; gap: 12px; flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #080F1E;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 10px 22px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.88; text-decoration: none; }
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    font-size: 14px;
+    padding: 10px 22px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+  /* ── SYSTEM STATUS CARD ── */
+  .status-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .status-card-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px;
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .traffic { display: flex; gap: 6px; }
+  .traffic span {
+    width: 10px; height: 10px; border-radius: 50%;
+  }
+  .tr { background: #EF4444; }
+  .ty { background: #FBBF24; }
+  .tg { background: #34D399; }
+
+  .status-body { padding: 16px; }
+  .status-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .status-row:last-child { border-bottom: none; }
+  .status-label { color: var(--muted); font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; }
+  .status-value { font-weight: 500; color: var(--text); }
+  .status-value.green { color: var(--green); }
+  .status-value.accent { color: var(--accent); }
+  .status-value.amber { color: var(--amber); }
+
+  .uptime-bar {
+    margin-top: 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .bar-track {
+    height: 6px; background: var(--border);
+    border-radius: 3px; overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%; background: var(--green);
+    border-radius: 3px;
+    width: 99%;
+  }
+
+  /* ── STATS STRIP ── */
+  .stats-strip {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .stats-inner {
+    max-width: 1100px; margin: 0 auto;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--accent);
+    font-family: var(--mono);
+    letter-spacing: -0.02em;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .stat-divider {
+    border-right: 1px solid var(--border);
+  }
+
+  /* ── SECTIONS ── */
+  section { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 2.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  /* ── SKILLS GRID ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    transition: border-color 0.2s;
+  }
+  .skill-card:hover { border-color: var(--accent); }
+  .skill-card-icon {
+    font-size: 20px;
+    margin-bottom: 0.75rem;
+  }
+  .skill-card h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+  .skill-card p {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .skill-pills {
+    display: flex; flex-wrap: wrap; gap: 5px;
+    margin-top: 0.75rem;
+  }
+  .pill {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    background: rgba(56,189,248,0.08);
+    color: var(--accent);
+    border: 1px solid rgba(56,189,248,0.2);
+  }
+
+  /* ── EXPERIENCE TIMELINE ── */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 7px; top: 8px;
+    width: 1px; bottom: 0;
+    background: var(--border);
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+  }
+  .tl-dot {
+    position: absolute;
+    left: -28px; top: 6px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--border);
+    transition: border-color 0.2s;
+  }
+  .tl-item.current .tl-dot {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(52,211,153,0.15);
+  }
+  .tl-header {
+    display: flex; justify-content: space-between;
+    align-items: flex-start; flex-wrap: wrap; gap: 4px;
+    margin-bottom: 4px;
+  }
+  .tl-role {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text);
+  }
+  .tl-date {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .tl-company {
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .tl-badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    background: rgba(52,211,153,0.1);
+    color: var(--green);
+    border: 1px solid rgba(52,211,153,0.25);
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .tl-body {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .tl-body ul {
+    list-style: none; padding: 0;
+    margin-top: 6px;
+  }
+  .tl-body ul li {
+    padding-left: 16px;
+    position: relative;
+    margin-bottom: 4px;
+  }
+  .tl-body ul li::before {
+    content: '›';
+    position: absolute; left: 0;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* ── TOOLS ── */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
+  }
+  .tool-chip {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: var(--mono);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .tool-chip:hover { border-color: var(--accent2); color: var(--text); }
+
+  /* ── CTA ── */
+  .cta-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-block::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%;
+    transform: translateX(-50%);
+    width: 300px; height: 160px;
+    background: radial-gradient(ellipse, rgba(56,189,248,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-block h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+  .cta-block p {
+    color: var(--muted);
+    margin-bottom: 1.75rem;
+    max-width: 440px;
+    margin-left: auto; margin-right: auto;
+  }
+  .cta-contacts {
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem;
+    margin-top: 1.5rem;
+    font-size: 13px;
+    font-family: var(--mono);
+    color: var(--muted);
+  }
+  .cta-contacts span { display: flex; align-items: center; gap: 6px; }
+  .cta-contacts .ci { color: var(--accent); }
+
+  footer {
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: var(--mono);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 800px) {
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 3rem 1.25rem 2.5rem;
+    }
+    .status-card { display: none; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .stat-divider:nth-child(2) { border-right: none; }
+    section { padding: 3rem 1.25rem; }
+    .cta-block { padding: 2rem 1.25rem; }
+    .nav-links { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dot-live { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">josephaguilar.dev</span>
+  <div class="nav-links">
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#tools">Tools</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="dot-live"></span>
+      AVAILABLE FOR HIRE · METRO MANILA, PH
+    </div>
+    <h1>Joseph<br><span>Aguilar</span></h1>
+    <p class="hero-sub">
+      Senior IT Service Desk Engineer with 8+ years resolving enterprise-level technical issues across M365, Active Directory, endpoint management, and cloud platforms — reliably, and under SLA.
+    </p>
+    <div class="hero-tags">
+      <span class="tag">Microsoft 365</span>
+      <span class="tag">L2 Support</span>
+      <span class="tag">Active Directory</span>
+      <span class="tag">ServiceNow</span>
+      <span class="tag">Endpoint Mgmt</span>
+      <span class="tag">Managed Services</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">Hire Me</a>
+      <a href="#experience" class="btn-secondary">View Experience</a>
+    </div>
+  </div>
+
+  <!-- SYSTEM STATUS CARD -->
+  <div class="hero-right">
+    <div class="status-card">
+      <div class="status-card-header">
+        <div class="traffic">
+          <span class="tr"></span><span class="ty"></span><span class="tg"></span>
+        </div>
+        &nbsp; engineer_profile.status
+      </div>
+      <div class="status-body">
+        <div class="status-row">
+          <span class="status-label">STATUS</span>
+          <span class="status-value green">● ACTIVE · EMPLOYED</span>
+        </div>
+        <div class="status-row">
+          <span class="status-label">CURRENT ROLE</span>
+          <span class="status-value">Service Desk Engineer</span>
+        </div>
+        <div class="status-row">
+          <span class="status-label">CLIENT</span>
+          <span class="status-value accent">Opensity Solutions</span>
+        </div>
+        <div class="status-row">
+          <span class="status-label">EMPLOYER</span>
+          <span class="status-value">Emapta</span>
+        </div>
+        <div class="status-row">
+          <span class="status-label">EXPERIENCE</span>
+          <span class="status-value amber">8+ YEARS</span>
+        </div>
+        <div class="status-row">
+          <span class="status-label">SPECIALISATION</span>
+          <span class="status-value accent">M365 · L2 · ITSM</span>
+        </div>
+        <div class="status-row">
+          <span class="status-label">LOCATION</span>
+          <span class="status-value">Metro Manila, PH</span>
+        </div>
+        <div class="status-row">
+          <span class="status-label">AVAILABILITY</span>
+          <span class="status-value green">Open to Opportunities</span>
+        </div>
+        <div class="uptime-bar">RELIABILITY · 99%</div>
+        <div class="bar-track"><div class="bar-fill"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-divider">
+      <div class="stat-num">8+</div>
+      <div class="stat-label">Years of IT Experience</div>
+    </div>
+    <div class="stat-divider">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Enterprise Employers</div>
+    </div>
+    <div class="stat-divider">
+      <div class="stat-num">L2</div>
+      <div class="stat-label">Support Level</div>
+    </div>
+    <div>
+      <div class="stat-num">M365</div>
+      <div class="stat-label">Core Specialisation</div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">// WHAT I DO</div>
+  <h2 class="section-title">Core Skills & Expertise</h2>
+  <div class="skills-grid">
+
+    <div class="skill-card">
+      <div class="skill-card-icon">☁️</div>
+      <h3>Microsoft 365 Administration</h3>
+      <p>Full-stack M365 support — from Exchange Online mailbox management to Teams provisioning, SharePoint permissions, OneDrive, and Microsoft Defender policies.</p>
+      <div class="skill-pills">
+        <span class="pill">Exchange Online</span>
+        <span class="pill">Teams</span>
+        <span class="pill">SharePoint</span>
+        <span class="pill">Defender</span>
+        <span class="pill">OneDrive</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-icon">🔐</div>
+      <h3>Identity & Access Management</h3>
+      <p>Active Directory administration, OKTA, account provisioning, group policy management, MFA enforcement, and security policy application.</p>
+      <div class="skill-pills">
+        <span class="pill">Active Directory</span>
+        <span class="pill">OKTA</span>
+        <span class="pill">MFA</span>
+        <span class="pill">Group Policy</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-icon">📱</div>
+      <h3>Endpoint & MDM Management</h3>
+      <p>Device management across platforms using Microsoft Intune, SOTI MobiControl, and Mobile Iron — covering both Android and iOS enterprise fleets.</p>
+      <div class="skill-pills">
+        <span class="pill">Intune</span>
+        <span class="pill">SOTI</span>
+        <span class="pill">Mobile Iron</span>
+        <span class="pill">iOS/Android</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-icon">🎫</div>
+      <h3>ITSM & Incident Management</h3>
+      <p>Experienced with major ITSM platforms for ticket logging, escalation management, SLA tracking, and knowledge base documentation.</p>
+      <div class="skill-pills">
+        <span class="pill">ServiceNow</span>
+        <span class="pill">Freshservice</span>
+        <span class="pill">ManageEngine</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-icon">🖥️</div>
+      <h3>Virtualization & Remote Tools</h3>
+      <p>Proficient with VMware, Citrix, and ConnectWise environments. Experienced using Bomgar, TeamViewer, Splashtop, and RDP for remote support delivery.</p>
+      <div class="skill-pills">
+        <span class="pill">VMware</span>
+        <span class="pill">Citrix</span>
+        <span class="pill">Bomgar</span>
+        <span class="pill">RDP</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-icon">🛡️</div>
+      <h3>Security & Antivirus Management</h3>
+      <p>Deployed and managed endpoint security solutions, enforced security policies, and maintained compliance across enterprise environments.</p>
+      <div class="skill-pills">
+        <span class="pill">Symantec</span>
+        <span class="pill">McAfee</span>
+        <span class="pill">Bitdefender</span>
+        <span class="pill">MFA</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="padding-top: 0;">
+  <div class="section-label">// CAREER HISTORY</div>
+  <h2 class="section-title">Professional Experience</h2>
+  <div class="timeline">
+
+    <div class="tl-item current">
+      <div class="tl-dot"></div>
+      <div class="tl-header">
+        <div class="tl-role">Service Desk Engineer <span class="tl-badge">CURRENT</span></div>
+        <div class="tl-date">Dec 2025 – Present</div>
+      </div>
+      <div class="tl-company">Emapta · Client: Opensity Solutions</div>
+      <div class="tl-body">
+        <ul>
+          <li>Providing L1/L2 IT service desk support for Opensity Solutions, a tech-enabled managed services provider, supporting a diverse client base across multiple industries.</li>
+          <li>Handling incident management, service requests, and troubleshooting across software, hardware, network, and cloud-based platforms in a fast-paced managed services environment.</li>
+          <li>Coordinating with internal teams and client stakeholders to ensure timely resolution of issues within agreed SLAs and escalation frameworks.</li>
+          <li>Maintaining accurate and thorough ticket documentation using ITSM tools, contributing to knowledge base development and process improvement initiatives.</li>
+          <li>Supporting Microsoft 365, Active Directory, and endpoint management tasks as part of day-to-day managed services delivery.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-header">
+        <div class="tl-role">M365 Support Engineer</div>
+        <div class="tl-date">Jul 2024 – Feb 2025</div>
+      </div>
+      <div class="tl-company">Infosys BPM · BGC, Taguig</div>
+      <div class="tl-body">
+        <ul>
+          <li>Delivered high-level L2 support and technical consultation for Microsoft 365 technologies to enterprise clients, consistently achieving SLA targets.</li>
+          <li>Diagnosed and resolved complex issues across Exchange Online, SharePoint Online, Teams, OneDrive for Business, and Office apps, reducing escalation rates.</li>
+          <li>Collaborated with Microsoft product and L3 teams to provide feedback and drive improvements in M365 services including Microsoft Defender for Office 365 and Endpoint Manager.</li>
+          <li>Conducted proactive system health checks and performance optimization reviews, preventing recurring incidents.</li>
+          <li>Maintained detailed documentation of support interactions, root cause analyses, and resolutions to build a reusable knowledge base.</li>
+          <li>Stayed current on Microsoft 365 updates, roadmaps, and industry trends to provide forward-thinking guidance to clients.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-header">
+        <div class="tl-role">IT Service Desk Analyst (L1/L2)</div>
+        <div class="tl-date">Aug 2022 – Jun 2024</div>
+      </div>
+      <div class="tl-company">Tata Consultancy Services · BGC, Taguig</div>
+      <div class="tl-body">
+        <ul>
+          <li>Managed and resolved phone, chat, and self-service tickets for IT issues, providing 1st and 2nd line support to enterprise clients.</li>
+          <li>Administered Active Directory processes including password resets, account unlocks, group membership management, and security policy application.</li>
+          <li>Handled Exchange Online and OKTA administration tasks such as email delegation, account creation, and app assignments.</li>
+          <li>Managed Citrix environments and performed Webex Admin duties including provisioning Optus Cloud Calling accounts.</li>
+          <li>Accurately escalated complex issues to L2/L3 and infrastructure teams following defined escalation paths and SLA requirements.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-header">
+        <div class="tl-role">IT Service Desk & Application Support</div>
+        <div class="tl-date">Nov 2020 – Apr 2022</div>
+      </div>
+      <div class="tl-company">Wipro · Eton Centris, Quezon City</div>
+      <div class="tl-body">
+        <ul>
+          <li>Provided L1/L2 support for software and hardware issues including VMware, Office 365, Pointcare, and HCHB applications for healthcare sector clients.</li>
+          <li>Performed account administration across multiple platforms: Active Directory, AS400, Vesta, and SAP PHR.</li>
+          <li>Managed mobile device compliance on SOTI MobiControl and Mobile Iron consoles for Android and iOS enterprise devices.</li>
+          <li>Documented all troubleshooting steps and resolutions in ITSM tickets with high accuracy and detail to support ongoing knowledge management.</li>
+          <li>Collaborated with L2 and L3 teams on escalated incidents requiring deeper investigation or infrastructure involvement.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-header">
+        <div class="tl-role">IT Service Desk Analyst</div>
+        <div class="tl-date">Oct 2018 – Oct 2020</div>
+      </div>
+      <div class="tl-company">iTech Global Business Solutions · Mandaluyong City</div>
+      <div class="tl-body">
+        <ul>
+          <li>Delivered 1st and 2nd level support via phone, email, and chat to JG Summit Holdings Inc. and its subsidiaries — URC, RRHI, RBC, and Robinsons Bank (PET).</li>
+          <li>Resolved software, hardware, network, and application issues for hundreds of enterprise users, consistently maintaining high customer satisfaction scores.</li>
+          <li>Utilized remote support tools to diagnose and fix issues efficiently without requiring on-site intervention.</li>
+          <li>Issued and tracked incident and service request reference numbers, maintaining accurate ticket records throughout the resolution lifecycle.</li>
+          <li>Supported Active Directory user administration and basic network troubleshooting for multiple business units under JG Summit.</li>
+          <li>Worked within ITSM workflows to meet SLA commitments and ensured timely escalation of unresolved issues to the appropriate teams.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-header">
+        <div class="tl-role">IT Desktop Support Technician</div>
+        <div class="tl-date">Feb 2017 – Jul 2018</div>
+      </div>
+      <div class="tl-company">Visaya KPO · Tanjay City, Neg. Or.</div>
+      <div class="tl-body">
+        <ul>
+          <li>Diagnosed and resolved hardware and software faults; installed and configured client software including i3 Dialer, Skype for Business, and Office 365.</li>
+          <li>Maintained and troubleshot LAN infrastructure, network printers, and computer hardware and software across the entire office environment.</li>
+          <li>Administered Active Directory accounts on Windows Server 2003/2012 — including creation, removal, password resets, and folder permission management.</li>
+          <li>Managed Bitdefender Gravity Zone antivirus policies and monitored network bandwidth performance using MRTG.</li>
+          <li>Onboarded new hires by registering biometrics and RFID access badges and orienting them on IT systems and tools.</li>
+          <li>Maintained company IT asset inventory, ensuring accurate records of all hardware and software assignments.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools" style="padding-top: 0;">
+  <div class="section-label">// TECH STACK</div>
+  <h2 class="section-title">Tools & Platforms</h2>
+  <div class="tools-grid">
+    <div class="tool-chip">Exchange Online</div>
+    <div class="tool-chip">SharePoint</div>
+    <div class="tool-chip">MS Teams</div>
+    <div class="tool-chip">OneDrive</div>
+    <div class="tool-chip">M365 Admin</div>
+    <div class="tool-chip">Intune</div>
+    <div class="tool-chip">Defender 365</div>
+    <div class="tool-chip">Active Directory</div>
+    <div class="tool-chip">OKTA</div>
+    <div class="tool-chip">ServiceNow</div>
+    <div class="tool-chip">Freshservice</div>
+    <div class="tool-chip">ManageEngine</div>
+    <div class="tool-chip">VMware</div>
+    <div class="tool-chip">Citrix</div>
+    <div class="tool-chip">Bomgar</div>
+    <div class="tool-chip">TeamViewer</div>
+    <div class="tool-chip">Splashtop</div>
+    <div class="tool-chip">SOTI MobiControl</div>
+    <div class="tool-chip">Mobile Iron</div>
+    <div class="tool-chip">Bitdefender</div>
+    <div class="tool-chip">Symantec</div>
+    <div class="tool-chip">McAfee</div>
+    <div class="tool-chip">ConnectWise</div>
+    <div class="tool-chip">Webex Admin</div>
+    <div class="tool-chip">Windows Server</div>
+    <div class="tool-chip">SAP PHR</div>
+    <div class="tool-chip">AS400</div>
+    <div class="tool-chip">Basic SQL</div>
+  </div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section id="contact">
+  <div class="cta-block">
+    <div class="section-label" style="justify-content: center; display: block;">// LET'S WORK TOGETHER</div>
+    <h2>Ready to bring reliable IT support to your team</h2>
+    <p>I'm open to full-time and project-based roles in L2 support, M365 administration, and IT service desk — remote or hybrid.</p>
+    <a href="mailto:josephaguilar757@gmail.com" class="btn-primary">Send Me a Message</a>
+    <div class="cta-contacts">
+      <span><span class="ci">📧</span> josephaguilar757@gmail.com</span>
+      <span><span class="ci">📞</span> 09672907590</span>
+      <span><span class="ci">📍</span> Metro Manila, PH</span>
+      <span><span class="ci">🔗</span> linkedin.com/in/joseph-aguilar-a20222166</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Joseph Aguilar · Senior IT Service Desk Engineer · Built for OnlineJobs.ph
+</footer>
+
+</body>
+</html>
